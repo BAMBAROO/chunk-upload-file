@@ -25,12 +25,11 @@
       fr.onload = async(ev) => {
         const CHUNK_SIZE = 1000;
         const chunk_count = ev.target.result.byteLength/CHUNK_SIZE;
-        console.log(chunk_count)
         console.log(ev.target.result.byteLength);
         
         console.log("read successfully");
         const fileName = Math.random() * 1000 + theFile.name;
-        for(let chunkId = 0; chunkId < chunk_count+1; chunkId++) {
+        for (let chunkId = 0; chunkId < chunk_count+1; chunkId++) {
           const chunk = ev.target.result.slice(chunkId * CHUNK_SIZE, chunkId * CHUNK_SIZE + CHUNK_SIZE);
 
           await fetch("http://localhost:8080/upload", {
@@ -44,7 +43,6 @@
           });
           output.textContent = Math.round(chunkId * 100 / chunk_count) + "%";
         }
-
       }
       fr.readAsArrayBuffer(theFile);
     });

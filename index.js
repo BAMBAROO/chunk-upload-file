@@ -11,9 +11,8 @@ server.on('request', (req, res) => {
   if(req.url === '/upload') {
     const fileName = req.headers['file-name'];
     req.on('data', (chunk) => {
-      console.log(chunk)
       fs.appendFileSync(fileName, chunk);
-      // console.log(`Chunk Received ${chunk.length}`);
+      console.log(`Chunk Received ${chunk.length}`);
     });
     res.end('uploaded!')
   }
